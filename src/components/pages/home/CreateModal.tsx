@@ -24,7 +24,7 @@ const CreateModal = ({ mode, initialData, onClose, setTableData }: IProps) => {
         control,
         handleSubmit,
         reset,
-        formState: { errors },
+        formState: { errors, isDirty },
     } = useForm<FormValues>({
         defaultValues: {
             title: '',
@@ -47,7 +47,7 @@ const CreateModal = ({ mode, initialData, onClose, setTableData }: IProps) => {
                 },
             ]);
             toast.success('Item Created Successfully');
-        } else {
+        } else if (isDirty) {
             setTableData((pre) =>
                 pre.map((item) =>
                     item.id === initialData?.id
